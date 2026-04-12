@@ -24,17 +24,17 @@ while flechas > inimigos_por_onda:
 print ("voce perdeu na onda " + str(ondas) + " e tinha " + str(inimigos_por_onda)+ " inimigos na onda e sobraram " + str(inimigos_por_onda - flechas) + " vivos")
 
 if ondas == 1:
-    print("seu rank: PESSIMO")
+    print("seu rank: PESSIMO, stats: game over")
     
 if ondas == 2:
-    print("seu rank: RUIM ")
+    print("seu rank: RUIM, stats: game over")
 
 if ondas == 3:
-    print("seu rank: MAIS OU MENOS")
+    print("seu rank: MAIS OU MENOS, stats: vitoria?")
 
 if ondas == 4:
-    print("seu rank: BOM")
+    print("seu rank: BOM, stats: vitoria!")
 
 
 if ondas == 5:
-    print("seu rank: PERFEITO")
+    print("seu rank: PERFEITO, stats: VITORIA PERFEITA!")
