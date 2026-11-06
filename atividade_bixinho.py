@@ -27,7 +27,8 @@ def criar_pet():
         "personalidade" : personalidade_escolhida,
         "fome" : 100,
         "energia" : 100,
-        "felicidade" : 100
+        "felicidade" : 100,
+        "carinho" : 100
     }
     return pet
 
@@ -42,24 +43,30 @@ def diminuir_stats(pet):
             pet["fome"] -= random.randint(1,5)
             pet["felicidade"] -= random.randint(1,5)
             pet["energia"] -= random.randint(1,5)
+            pet["carinho"] -= random.randint(1, 5)
         elif diminuir == 2:
             pet["fome"] -= random.randint(3,10)
             pet["felicidade"] -= random.randint(3,10)
             pet["energia"] -= random.randint(3,10)
+            pet["carinho"] -= random.randint(3, 10)
         elif diminuir == 3:
             pet["fome"] -= random.randint(5,20)
             pet["felicidade"] -= random.randint(5,20)
             pet["energia"] -= random.randint(5,20)
-
+            pet["carinho"] -= random.randint(5, 20)
 pet = criar_pet()
 
 while True:
     print("\n======================================================")
 
-    oq_fazer = input(f"1.comer, 2.brincar, 3.dormir, 4.checar stats, 5.sair do jogo ---> ")
+    oq_fazer = input(f"1.comer, 2.brincar, 3.dormir, 4.dar carinho, 5.checar stats, 6.sair do jogo ---> ")
     if oq_fazer == "1" and personalidade_escolhida == "guloso":
         pet["fome"] += 20
         pet["felicidade"] += 20
+        diminuir_stats(pet)
+        limites(pet)
+    elif oq_fazer == "1" and personalidade_escolhida == "guloso" and pet["carinho"] == 0:
+        pet["fome"] += 20
         diminuir_stats(pet)
         limites(pet)
     elif oq_fazer == "1":
@@ -71,8 +78,16 @@ while True:
         print(f"seu pet ta cheio")
         diminuir_stats(pet)
         limites(pet)
+    elif oq_fazer == "2" and personalidade_escolhida == "brincalhão" and pet["carinho"] == 0:
+        pet["energia"] -= 10
+        diminuir_stats(pet)
+        limites(pet)
     elif oq_fazer == "2" and personalidade_escolhida == "brincalhão":
         pet["felicidade"] += 35
+        pet["energia"] -= 10
+        diminuir_stats(pet)
+        limites(pet)
+    elif oq_fazer == "2" and pet["carinho"] == 0:
         pet["energia"] -= 10
         diminuir_stats(pet)
         limites(pet)
@@ -81,10 +96,19 @@ while True:
         pet["energia"] -= 10
         diminuir_stats(pet)
         limites(pet)
+    elif oq_fazer == "3" and personalidade_escolhida == "preguiçoso" and pet["carinho"] == 0:
+        time.sleep(5)
+        pet["energia"] += 35
+        diminuir_stats(pet)
+        limites(pet)
     elif oq_fazer == "3" and personalidade_escolhida == "preguiçoso":
         time.sleep(5)
         pet["energia"] += 35
         pet["felicidade"] += 20
+        diminuir_stats(pet)
+        limites(pet)
+    elif oq_fazer == "3" and pet["carinho"]:
+        time.sleep(5)
         diminuir_stats(pet)
         limites(pet)
     elif oq_fazer == "3":
@@ -92,11 +116,21 @@ while True:
         pet["felicidade"] += 20
         diminuir_stats(pet)
         limites(pet)
+    elif oq_fazer == "4" and personalidade_escolhida == "timido":
+        pet["felicidade"] += 20
+        pet["carinho"] += 40
+        diminuir_stats(pet)
+        limites(pet)
     elif oq_fazer == "4":
-        print(pet)
+        pet["felicidade"] += 20
+        pet["carinho"] += 20
         diminuir_stats(pet)
         limites(pet)
     elif oq_fazer == "5":
+        print(pet)
+        diminuir_stats(pet)
+        limites(pet)
+    elif oq_fazer == "6":
         print(f"foi legal o tempo que vc teve com seu pet, mas agora vc precisa viajar, vc o coloca para adoção e diz adeus, o vendo pela ultima vez")
         break
     else:
@@ -112,4 +146,3 @@ while True:
     elif pet["energia"] <= 0:
         print("SEU PET DESMAIA DO LADO DE FORA DA CASA ONDE SEU CORPO E DEVORADOS POR ANIMAIS SELVAGEIS")
         break
-
